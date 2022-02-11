@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+<script src="js/cityLoad.js"></script>
+<script src="js/productLoad.js"></script>
+<script src="js/referenceLoad.js"></script>
     <div class="image-container">
         <img src="assets/logo.png" class="img-fluid" alt="Energiteca" srcset="">
 
@@ -40,10 +43,8 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select name="" id="city" class="form-control">
-                            <option value="">Bogota</option>
-                            <option value="">Tunja</option>
-                            <option value="">Barrancabermeja</option>
+                        <select name="" id="city" class="form-control" onchange="cityLoad(this.value);">
+                            <?php include_once "php/cityLoad.php"; ?>
                         </select>
                         <label for="city">Ciudad</label>
                     </div>
@@ -112,18 +113,16 @@
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <select name="" id="product" class="form-control">
-                            <option value="LLANTAS">LLANTAS</option>
-                            <option value="BATERIAS">BATERIAS</option>
+                        <select name="" id="product" class="form-control" onchange="productLoad(this.value);">
+                            <?php include "php/productLoad.php"; ?> 
                         </select>
                         <label for="product">Producto</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select name="" id="brand" class="form-control">
-                            <option value="CHAMPION">CHAMPION</option>
-                            <option value="CHAMPION">MAC</option>
+                        <select name="brand" id="brand" class="form-control" onchange="brandLoad(this.value);">
+                            <?php include "php/brandLoad.php"; ?>
                         </select>
                         <label for="brand">Marca</label>
                     </div>
@@ -131,8 +130,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <select name="" id="reference" class="form-control">
-                            <option value="asdfa">27950CH</option>
-                            <option value="asdfa">27R950CH</option>
+                            <?php include "php/referenceLoad.php"; ?>
                         </select>
                         <label for="reference">Referencia</label>
                     </div>
@@ -179,8 +177,8 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select name="" id="branch" class="form-control">
-                            <option value="">Barrancabermeja</option>
+                        <select name="branch" id="branch" class="form-control">
+                            <?php include_once "php/branchLoad.php"; ?>
                         </select>
                         <label for="branch">Sucursal</label>
                     </div>
@@ -262,6 +260,7 @@
     <div class="negro">
         
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>

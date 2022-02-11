@@ -1,17 +1,18 @@
-<?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
+<?php  
+
     include("connection.php");
 
     try{
-    
-        $sql = "SELECT * From product";
         
+        $dataValue = $_GET["value"];
+
+        $sql = "SELECT b.idBranch, b.branchName From branch as b, city as c WHERE b.idCity = :dataValue and c.idCity = :dataValue";
         $send = $connect ->prepare($sql);
+        $send->bindParam(':dataValue', $dataValue);
         $send->execute();
         $test = $send -> fetchAll();
         foreach($test as $row){
-            echo "<option value=\"$row[idproduct]\">$row[productName]</option>";
+            echo "<option value=\"$row[idBranch]\">$row[branchName]</option>";
         }
         $connect = null;
         

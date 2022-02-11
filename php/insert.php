@@ -16,6 +16,8 @@
         $send->execute();
     
         echo "Datos cargados correctamente";
+
+        header("Location:../dataIns.php");
     }
     catch(PDOException $e){
         echo "Fallo";

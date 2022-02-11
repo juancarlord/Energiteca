@@ -9,21 +9,25 @@
 </head>
 <body>
     
+    
     <div class="container">
         <form action="php/insert.php" method="POST">
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <input type="text" name="product" id="insert" placeholder="test" class="form-control">
-                        <label for="model">Holi</label>
-                    </div>
+                        <select name="checker" id="model" class="form-control" 
+                        onchange="mine(this.value);">
+                        <?php include "php/loadchild.php" ?>
+                    </select>
+                    <label for="checker">Holi</label>
+                </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select name="checker" id="model" class="form-control">
-                        <?php include_once 'php/show.php'; ?>
+                        <select name="test" id="poll" class="form-control">
+                            <?php include "php/fromParent.php" ?>
                         </select>
-                        <label for="checker">Aqui se debe cargar</label>
+                        <label for="test">Aqui se debe cargar</label>
                     </div>
                 </div>
             </div>
@@ -37,7 +41,9 @@
             </div>
         </form>
     </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="js/cityLoad.js"></script>
+    
 </body>
 </html>
