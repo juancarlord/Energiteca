@@ -1,0 +1,3 @@
+INSERT INTO callTypification (callType) VALUES ("VENTA TELEFONICA INBOUND");
+INSERT INTO callTypification (callType) VALUES ("VENTA TELEFONICA OUTBOUND");
+INSERT INTO callTypification (callType) VALUES ("VENTA WHATSAPP");

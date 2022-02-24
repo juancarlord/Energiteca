@@ -1,0 +1,2 @@
+INSERT INTO vehicle (vehicleType ) VALUES ("AUTOMOVILES");
+INSERT INTO vehicle (vehicleType ) VALUES ("CAMPERO-CAMIONETAS-VANS");

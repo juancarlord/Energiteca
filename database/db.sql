@@ -80,28 +80,52 @@ CREATE TABLE campaign (
     PRIMARY KEY (idCampaign)
 );
 
-CREATE TABLE inboundCall (
-    idCall INT NOT NULL AUTO_INCREMENT, 
-    callDate DATE NOT NULL,
-    idCallTypification INT NOT NULL,
-    idCampaign INT NOT NULL, 
-    saleChannel VARCHAR(45) NOT NULL,
-    representativeName VARCHAR(55) NOT NULL,
-    PRIMARY KEY (idCall),
-    FOREIGN KEY (idCallTypification) REFERENCES callTypification(idCallTypification),
-    FOREIGN KEY (idCampaign) REFERENCES campaign(idCampaign)
+CREATE TABLE customer (
+    idCustomer INT NOT NULL AUTO_INCREMENT,
+    idType VARCHAR(45) NOT NULL,
+    idNumber VARCHAR(45) NOT NULL,
+    customerName VARCHAR(55) NOT NULL,
+    customerType VARCHAR(55) NOT NULL,
+    marketingChannel VARCHAR(55) NOT NULL,
+    customerAddress VARCHAR(100) NOT NULL,
+    customerZone VARCHAR(55) NOT NULL,
+    customerCellphone VARCHAR(15) NOT NULL,
+    customerLandline VARCHAR(15),
+    customerEmail VARCHAR(55) NOT NULL,
+    creationDate DATE NOT NULL,
+    PRIMARY KEY (idCustomer)
 );
 
-CREATE TABLE sale (
-    idSale INT NOT NULL AUTO_INCREMENT,
-    quantity INT NOT NULL,
-    price DECIMAL NOT NULL,
-    grandTotal DECIMAL NOT NULL,
-    idproductReference INT NOT NULL,
-    idCall INT NOT NULL,
+CREATE TABLE customerSale (
+    idCustomerSale INT NOT NULL AUTO_INCREMENT,
+    claveDeVenta INT NOT NULL,
+    saleDate DATE NOT NULL,
+    saleChannel VARCHAR(45) NOT NULL,
+    vehiclePlates VARCHAR(15),
+    complies TINYINT NOT NULL,
+    comments TEXT,
+    total DECIMAL NOT NULL,
+    representative VARCHAR(45) NOT NULL,
     idPayment INT NOT NULL,
-    PRIMARY KEY (idSale),
-    FOREIGN KEY (idproductReference) REFERENCES productReference(idproductReference),
-    FOREIGN KEY (idCall) REFERENCES inboundCall(idCall),
-    FOREIGN KEY (idPayment) REFERENCES payment(idPayment)
+    idBranch INT NOT NULL,
+    idVehicle INT NOT NULL,
+    idCampaign INT NOT NULL,
+    idCallTypification INT NOT NULL,
+    PRIMARY KEY (idCustomerSale),
+    FOREIGN KEY (idPayment) REFERENCES payment(idPayment),
+    FOREIGN KEY (idBranch) REFERENCES branch(idBranch),
+    FOREIGN KEY (idVehicle) REFERENCES vehicleReference(idvehicleReference),
+    FOREIGN KEY (idCampaign) REFERENCES campaign(idCampaign),
+    FOREIGN KEY (idCallTypification) REFERENCES callTypification(idCallTypification)   
 );
+
+CREATE TABLE customerProduct (
+    idCustomerProduct INT NOT NULL AUTO_INCREMENT,
+    idProduct INT NOT NULL,
+    idCustomerSale INT NOT NULL,
+    price DECIMAL NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY (idCustomerProduct),
+    FOREIGN KEY (idProduct) REFERENCES productReference(idproductReference),
+    FOREIGN KEY (idCustomerSale) REFERENCES customerSale(idCustomerSale)
+)
