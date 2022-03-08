@@ -12,6 +12,8 @@
 <script src="js/cityLoad.js"></script>
 <script src="js/productLoad.js"></script>
 <script src="js/referenceLoad.js"></script>
+<script src="js/productLoad2.js"></script>
+<script src="js/referenceLoad2.js"></script>
 <script src="js/vehicleLoad.js"></script>
 <script src="js/deliveryLoad.js"></script>
 <script>
@@ -27,12 +29,17 @@
         }
     }
 </script>
+    <?php 
+        session_start();
+        $test = $_GET['claveVenta'];
+        $_SESSION['clave'] = $test;
+    ?>
     <div class="image-container">
         <img src="assets/logo.png" class="img-fluid" alt="Energiteca" srcset="">
 
     </div>
     <div class="container">
-        <form action="php/insertData.php" method="POST">
+        <form action="php/insertData.php" method="POST" onsubmit="return alert('Informacion enviada');">
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
@@ -176,7 +183,7 @@
             <div class="row" id="hidden" style="display: none;" >
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <select name="" id="product" class="form-control" onchange="productLoad(this.value);">
+                        <select name="productType2" id="product" class="form-control" onchange="productLoad2(this.value);">
                             <?php include "php/productLoad.php"; ?> 
                         </select>
                         <label for="product">Producto</label>
@@ -184,7 +191,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select name="brand" id="brand" class="form-control" onchange="brandLoad(this.value);">
+                        <select name="brand2" id="brand2" class="form-control" onchange="brandLoad2(this.value);">
                             <?php include "php/brandLoad.php"; ?>
                         </select>
                         <label for="brand">Marca</label>
@@ -192,7 +199,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select name="" id="reference" class="form-control">
+                        <select name="pReference2" id="reference2" class="form-control">
                             <?php include "php/referenceLoad.php"; ?>
                         </select>
                         <label for="reference">Referencia</label>
@@ -200,13 +207,13 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="number" placeholder="quantity" name="" id="quantity" class="form-control">
+                        <input type="number" placeholder="quantity" name="quantity2" id="quantity" class="form-control">
                         <label for="quantity">Cantidad</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="number" name="" placeholder="grandTotal" id="grandTotal" class="form-control">
+                        <input type="number" name="grandTotal2" placeholder="grandTotal" id="grandTotal" class="form-control">
                         <label for="grandTotal">Valor venta</label>
                     </div>
                 </div>
@@ -298,15 +305,15 @@
                         <label for="typification">Tipificacion de la llamada</label>
                     </div>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                     <div class="form-floating">
                         <input type="text" name="representative" placeholder="representative" id="representative" class="form-control" required>
                         <label for="representative">Asesor</label>
                     </div>
-                </div>
+                </div> -->
 
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
                     <select name="saleChannel" id="saleChannel" class="form-control" required>
@@ -325,7 +332,7 @@
                         <label for="campaign">Tipo de campaña</label>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">

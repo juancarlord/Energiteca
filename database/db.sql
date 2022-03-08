@@ -1,7 +1,3 @@
-CREATE DATABASE IF NOT EXISTS energiteca;
-
-USE energiteca;
-
 CREATE TABLE product (
     idproduct INT NOT NULL AUTO_INCREMENT,
     productName VARCHAR(45) NOT NULL,
@@ -90,7 +86,7 @@ CREATE TABLE customer (
     customerAddress VARCHAR(100) NOT NULL,
     customerZone VARCHAR(55) NOT NULL,
     customerCellphone VARCHAR(15) NOT NULL,
-    customerLandline VARCHAR(15),
+    customerDetails VARCHAR(15),
     customerEmail VARCHAR(55) NOT NULL,
     creationDate DATE NOT NULL,
     PRIMARY KEY (idCustomer)
@@ -100,23 +96,34 @@ CREATE TABLE customerSale (
     idCustomerSale INT NOT NULL AUTO_INCREMENT,
     claveDeVenta INT NOT NULL,
     saleDate DATE NOT NULL,
-    saleChannel VARCHAR(45) NOT NULL,
+    saleChannel VARCHAR(45),
     vehiclePlates VARCHAR(15),
     complies TINYINT NOT NULL,
     comments TEXT,
     total DECIMAL NOT NULL,
-    representative VARCHAR(45) NOT NULL,
+    representative VARCHAR(45),
     idPayment INT NOT NULL,
     idBranch INT NOT NULL,
     idVehicle INT NOT NULL,
-    idCampaign INT NOT NULL,
+    idCampaign INT,
     idCallTypification INT NOT NULL,
+    idCustomer INT NOT NULL,
+    ventaAnulada VARCHAR(5),
+    aTiempo VARCHAR(2),
+    motivoNoEntrega TEXT,
+    horaEntrega VARCHAR(255),
+    estadoFinal INT(2),
+    motivoCancelacion VARCHAR(255),
+    otroMotivo VARCHAR(255),
+    fechaAnulacion VARCHAR(30),
+    disposition VARCHAR(50),
+    service VARCHAR(50),
     PRIMARY KEY (idCustomerSale),
     FOREIGN KEY (idPayment) REFERENCES payment(idPayment),
     FOREIGN KEY (idBranch) REFERENCES branch(idBranch),
     FOREIGN KEY (idVehicle) REFERENCES vehicleReference(idvehicleReference),
     FOREIGN KEY (idCampaign) REFERENCES campaign(idCampaign),
-    FOREIGN KEY (idCallTypification) REFERENCES callTypification(idCallTypification)   
+    FOREIGN KEY (idCallTypification) REFERENCES callTypification(idCallTypification),FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer)
 );
 
 CREATE TABLE customerProduct (
@@ -128,4 +135,19 @@ CREATE TABLE customerProduct (
     PRIMARY KEY (idCustomerProduct),
     FOREIGN KEY (idProduct) REFERENCES productReference(idproductReference),
     FOREIGN KEY (idCustomerSale) REFERENCES customerSale(idCustomerSale)
-)
+);
+
+CREATE TABLE departamentos (
+    idDepartamento INT NOT NULL AUTO_INCREMENT,
+    Departamento VARCHAR(255) NOT NULL, 
+    codigo INT NOT NULL,
+    PRIMARY KEY (idDepartamento)
+);
+CREATE TABLE municipios (
+    idMunicipio INT NOT NULL AUTO_INCREMENT,
+    departamentoID INT NOT NULL,
+    codigo INT NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    PRIMARY KEY(idMunicipio),
+    FOREIGN KEY(departamentoID) REFERENCES departamentos(idDepartamento)
+);
